@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
+
 class ProductoController extends Controller
 {
     /**
@@ -12,9 +13,12 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Producto $producto)
     {
-       return response()->json(Producto::with('categoria')->get());
+        $productos = $producto->GetProductos();
+        //$image = $productos->getFirstMediaUrl('productos');
+        $producto->obtenerImagen($productos);
+        return response()->json(['productos'=>$productos]);
     }
 
     /**
@@ -35,7 +39,8 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        Producto::create($request->all());
+       $producto= Producto::create($request->all());
+
         return  response()->json(['mensaje'=>"success",'else'=>'producto ingresado correctamente']);
     }
 
