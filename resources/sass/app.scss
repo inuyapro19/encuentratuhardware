@@ -4,10 +4,14 @@
 
 // Variables
 @import 'variables';
-
+@import "header";
 
 
 //contenedor
+body{
+  font-family: $font-family-sans-serif;
+}
+
 
 .contenedor{
   width: 1100px;
